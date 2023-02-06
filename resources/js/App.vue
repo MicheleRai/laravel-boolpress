@@ -1,15 +1,15 @@
 <template>
     <div>
-        <NavBar></NavBar>
+        <NavBar />
         <h1>io vengo da app</h1>
         <!-- navbar -->
 
         <main>
-            <router-view></router-view>
+            <router-view />
         </main>
 
         <!-- footer -->
-
+        <Footer></Footer>
         <!-- <div class="container">
             <h1 class="">Frontoffice in Vue</h1>
             <div class="row g-3">
@@ -31,11 +31,13 @@
 <script>
 
 import NavBar from './components/NavBar';
+import Footer from "./components/Footer";
 
 export default {
     name: 'App',
     components: {
-        NavBar,
+        NavBar, // NavBar: NavBar
+        Footer, // Footer: Footer
     },
     data() {
         return {
