@@ -2,7 +2,7 @@
     <div>
       <div>ciao</div>
       <h1>{{ objPost.title }}</h1>
-      <img :src="post.image" class="card-img-top" :alt="objPost.title">
+      <img :src="objPost.image" class="card-img-top" :alt="objPost.title">
       <p>
         {{ objPost.content }}
       </p>
@@ -21,7 +21,7 @@
       }
     },
     created() {
-      axios.get('api/posts/' + this.slug)
+      axios.get('/api/posts/' + this.slug)
         .then(response => this.objPost = response.data.results)
     }
   }

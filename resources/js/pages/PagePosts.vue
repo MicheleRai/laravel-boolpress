@@ -8,7 +8,8 @@
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text flex-grow-1">{{ post.excerpt }}</p>
-            <router-link class="btn btn-primary" :to="{name: 'postsShow', params: {slag: post.slug}}">Leggi</router-link>
+            <router-link class="btn btn-primary" :to="{name: 'postsShow', params: {slug: post.slug}}">Leggi</router-link>
+
           </div>
         </div>
       </div>

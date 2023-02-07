@@ -5266,7 +5266,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     var _this = this;
-    axios.get('api/posts/' + this.slug).then(function (response) {
+    axios.get('/api/posts/' + this.slug).then(function (response) {
       return _this.objPost = response.data.results;
     });
   }
@@ -5285,6 +5285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -12164,7 +12165,7 @@ var render = function () {
     _vm._v(" "),
     _c("img", {
       staticClass: "card-img-top",
-      attrs: { src: _vm.post.image, alt: _vm.objPost.title },
+      attrs: { src: _vm.objPost.image, alt: _vm.objPost.title },
     }),
     _vm._v(" "),
     _c("p", [_vm._v("\n    " + _vm._s(_vm.objPost.content) + "\n  ")]),
@@ -12224,7 +12225,7 @@ var render = function () {
                   {
                     staticClass: "btn btn-primary",
                     attrs: {
-                      to: { name: "postsShow", params: { slag: post.slug } },
+                      to: { name: "postsShow", params: { slug: post.slug } },
                     },
                   },
                   [_vm._v("Leggi")]
