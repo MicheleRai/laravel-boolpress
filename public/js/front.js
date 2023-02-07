@@ -5066,19 +5066,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5228,8 +5215,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      arrRandom: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+    axios.get('/api/posts/random').then(function (response) {
+      return _this.arrRandom = response.data.results;
+    });
+  }
+});
 
 /***/ }),
 
@@ -5253,9 +5254,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['slug']
+  props: ['slug'],
+  data: function data() {
+    return {
+      objPost: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+    axios.get('api/posts/' + this.slug).then(function (response) {
+      return _this.objPost = response.data.results;
+    });
+  }
 });
 
 /***/ }),
@@ -5277,8 +5291,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      arrPosts: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+    axios.get('api/posts').then(function (response) {
+      return _this.arrPosts = response.data.results;
+    });
+  }
+});
 
 /***/ }),
 
@@ -11824,7 +11862,9 @@ var render = function () {
       _vm._v(" "),
       _c("h1", [_vm._v("io vengo da app")]),
       _vm._v(" "),
-      _c("main", [_c("router-view")], 1),
+      _c("main", [
+        _c("div", { staticClass: "container" }, [_c("router-view")], 1),
+      ]),
       _vm._v(" "),
       _c("Footer"),
     ],
@@ -12083,16 +12123,18 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "grid" },
+    _vm._l(_vm.arrRandom, function (post) {
+      return _c("div", { key: post.id }, [
+        _c("img", { attrs: { src: post.image, alt: post.title } }),
+      ])
+    }),
+    0
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Home")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -12116,11 +12158,16 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Show del post")]),
+    _c("div", [_vm._v("ciao")]),
     _vm._v(" "),
-    _c("p", [
-      _vm._v("\n    Lo slug del posts e': " + _vm._s(_vm.slug) + "\n  "),
-    ]),
+    _c("h1", [_vm._v(_vm._s(_vm.objPost.title))]),
+    _vm._v(" "),
+    _c("img", {
+      staticClass: "card-img-top",
+      attrs: { src: _vm.post.image, alt: _vm.objPost.title },
+    }),
+    _vm._v(" "),
+    _c("p", [_vm._v("\n    " + _vm._s(_vm.objPost.content) + "\n  ")]),
   ])
 }
 var staticRenderFns = []
@@ -12146,16 +12193,53 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", [_vm._v("Index dei posts")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row g-3" },
+      _vm._l(_vm.arrPosts, function (post) {
+        return _c("div", { key: post.id, staticClass: "col-sm-6 col-md-4" }, [
+          _c("div", { staticClass: "card h-100" }, [
+            _c("img", {
+              staticClass: "card-img-top",
+              attrs: { src: post.image, alt: post.title },
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body d-flex flex-column" },
+              [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(post.title)),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text flex-grow-1" }, [
+                  _vm._v(_vm._s(post.excerpt)),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: {
+                      to: { name: "postsShow", params: { slag: post.slug } },
+                    },
+                  },
+                  [_vm._v("Leggi")]
+                ),
+              ],
+              1
+            ),
+          ]),
+        ])
+      }),
+      0
+    ),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Index dei posts")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

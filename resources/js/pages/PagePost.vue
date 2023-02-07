@@ -1,8 +1,10 @@
 <template>
     <div>
-      <h1>Show del post</h1>
+      <div>ciao</div>
+      <h1>{{ objPost.title }}</h1>
+      <img :src="post.image" class="card-img-top" :alt="objPost.title">
       <p>
-        Lo slug del posts e': {{ slug }}
+        {{ objPost.content }}
       </p>
     </div>
   </template>
@@ -11,7 +13,17 @@
   export default {
     props: [
       'slug'
-    ]
+    ],
+    data() {
+      return{
+        objPost: null,
+
+      }
+    },
+    created() {
+      axios.get('api/posts/' + this.slug)
+        .then(response => this.objPost = response.data.results)
+    }
   }
   </script>
 

@@ -1,15 +1,26 @@
 <template>
-    <div>
-      <h1>Home</h1>
+  <div class="grid">
+    <div v-for="post in arrRandom" :key="post.id">
+      <img :src="post.image" :alt="post.title">
     </div>
-  </template>
+  </div>
+</template>
 
-  <script>
-  export default {
+<script>
 
+export default {
+  data() {
+    return {
+      arrRandom: null,
+    }
+  },
+  created() {
+    axios.get('/api/posts/random')
+      .then(response => this.arrRandom = response.data.results);
   }
-  </script>
+}
+</script>
 
-  <style>
+<style>
 
-  </style>
+</style>
